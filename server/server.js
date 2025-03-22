@@ -9,6 +9,7 @@ import companyRoutes from './routes/companyRoutes.js'
 import connectCloudinary from './config/cloudinary.js'
 
 
+
 //Initialize Express
 const app = express()
 

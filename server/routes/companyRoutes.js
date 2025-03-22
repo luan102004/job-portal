@@ -5,7 +5,7 @@ import upload from '../config/multer.js'
 const router = express.Router()
 
 //Register a company 
-router.post('/register',upload.single('image') , registerCompany )
+router.post('/register',upload.single('image'), registerCompany )
 
 //Company login 
 router.post('/login',loginCompany)
