@@ -4,7 +4,7 @@
   "main": "server.js",
   "type": "module",
   "dependencies": {
-    "@sentry/node": "^9.6.1",
+    "@sentry/node": "^9.8.0",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
     "cors": "^2.8.5",
