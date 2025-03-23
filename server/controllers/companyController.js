@@ -2,6 +2,7 @@ import Company from "../models/Company.js";
 import bcrypt  from 'bcrypt'
 import {v2 as cloudinary} from 'cloudinary'
 import generateToken from "../utils/generateToken.js";
+import Job from "../models/Job.js";
 
 //Register a new company
 export const registerCompany = async (req,res) =>{
@@ -56,7 +57,7 @@ export const loginCompany =async (req,res)=>{
     try {
         const company =await Company.findOne({email})
 
-        if (bcrypt.compare(password,company.password)) {
+        if (await bcrypt.compare(password,company.password)) {
 
             res.json({
                 success:true,
@@ -83,10 +84,46 @@ export const loginCompany =async (req,res)=>{
 // Get company data
 export const getCompanyData = async (req,res)=>{
 
+    try {
+
+        const company =req.company
+
+        res.json({success:true,company})
+
+    } catch (error) {
+        res.json({
+            success:false,message:error.message
+        })
+    }
+
 }
  //post a new job
  export const postJob = async (req,res) =>{
 
+    const {title,description,location,salary,level,category}=req.body
+
+    const companyId= req.company._id
+
+       try {
+        const newJob = new Job({
+            title,
+            description,
+            location,
+            salary,
+            companyId,
+            date: Date.now(),
+            level,
+            category
+        })
+
+        await newJob.save()
+
+        res.json({success: true,newJob})
+    } catch (error) {
+
+        res.json({success: false,message: error.message})
+        
+    }
  }
 
  //Get Company Job Applicants
@@ -96,7 +133,19 @@ export const getCompanyData = async (req,res)=>{
 
  //Get Company Posted Jobs
  export const getCompanyPostedJobs = async (req,res) =>{
+    try {
 
+        const companyId= req.company._id
+
+        const jobs = await Job.find({companyId})
+
+        //(ToDo) Adding No. off applicants info in data
+
+        res.json({success:true,jobData:jobs})
+        
+    } catch (error) {
+        res.json({success:false,message:error.message })
+    }
  }
  //Change Job Application Status
  export const ChangeJobApplicationsStatus = async (req,res)=>{
@@ -104,5 +153,23 @@ export const getCompanyData = async (req,res)=>{
  }
  //Change job visiblity
  export const changeVisiblity=async(req,res)=>{
+    try {
 
+        const {id} = req.body
+
+        const companyId=req.company._id
+
+        const job =await Job.findById(id)
+
+        if (companyId.toString() === job.companyId.toString()) {
+            job.visible =!job.visible
+        }
+
+        await job.save()
+
+        res.json({success:true,job})
+        
+    } catch (error) {
+        res.json({success:false,message:error.message})
+    }
  }
