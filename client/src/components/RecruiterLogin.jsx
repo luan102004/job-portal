@@ -31,7 +31,6 @@ const RecruiterLogin = () => {
                 const {data}=await axios.post(backendUrl + '/api/company/login',{email,password})
 
                 if (data.success) {
-                 
                     setCompanyData(data.company)
                     setCompanyToken(data.token)
                     localStorage.setItem('companyToken',data.token)
@@ -50,8 +49,7 @@ const RecruiterLogin = () => {
 
                 const {data}= await axios.post(backendUrl+'/api/company/register',formData)
 
-                if (data.success) {
-                   
+                if (data.success) { 
                     setCompanyData(data.company)
                     setCompanyToken(data.token)
                     localStorage.setItem('companyToken',data.token)
