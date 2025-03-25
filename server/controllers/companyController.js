@@ -134,9 +134,9 @@ export const getCompanyData = async (req,res)=>{
         const companyId = req.company._id
 
         //Find job applications for the user  and populate related data
-        const applications = await JobApplication.find({companyId })
-        .populate('userId','name image resume ')
-        .populate('jobId ','title location category level salary')
+        const applications = await JobApplication.find({companyId})
+        .populate('userId', 'name image resume')
+        .populate('jobId', 'title location category level salary')
         .exec()
 
         return res.json({success:true,applications})
@@ -173,7 +173,7 @@ export const getCompanyData = async (req,res)=>{
          const {id,status}=req.body 
 
     //Find Job application and update status
-    await JobApplication.findOneAndUpdate({_id:id },{status})
+    await JobApplication.findOneAndUpdate({_id: id},{status})
 
     res.json({success:true , message:'Status Changed'})
 

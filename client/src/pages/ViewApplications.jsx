@@ -34,7 +34,7 @@ const ViewApplications = () => {
     try {
 
       const {data} = await axios.post(backendUrl+'/api/company/change-status',
-        {id,status},
+        {id, status},
         {headers:{token:companyToken}}
       )
       if (data.success) {
@@ -55,7 +55,7 @@ const ViewApplications = () => {
 
    },[companyToken])
 
-  return applicants ? applicants.length ===0?(
+  return applicants ? applicants.length === 0 ? (
     <div className='flex items-center justify-center h-[70vh]'>
     <p className='text-x1 sm:text-2x1'> No Applications Available</p>
   </div>
@@ -91,7 +91,7 @@ const ViewApplications = () => {
                   </a>
                 </td>
                 <td className='py-2 px-4 border-b relative'>
-                  {applicant.status === "pending "
+                  {applicant.status === "Pending" 
                   ? <div className='relative inline-block text-left group'>
                     <button className='text-gray-500 action-button'>...</button>
                     <div className='z-10 hidden absolute right-0 md:left-8 top-0 mt-2 w-32 bg-white border border-gray-200 rounded shadow group-hover:block'>
@@ -99,9 +99,8 @@ const ViewApplications = () => {
                       <button onClick={()=> changeJobApplicationStatus(applicant._id,'Rejected')} className='block w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100'>Reject</button>
                     </div>
                   </div>
-                  :<div>{applicant.status}</div>
-                }
-                 
+                  : <div>{applicant.status}</div>
+                }                
                 </td>
               </tr>
             ))}
