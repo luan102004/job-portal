@@ -79,8 +79,8 @@ const RecruiterLogin = () => {
 return (
 <div className='absolute top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center '>
     <form onSubmit={onSubmitHandler} className='relative bg-white p-10 rounded text-slate-500'>
-    <h1 className='text-center text-2x1 text-neutral-700 font-medium'>Đăng nhập tuyển dụng {state}</h1>
-    <p className='text-sm'>Chào mừng bạn trở lại! Vui lòng đăng nhập để tiếp tục</p>
+    <h1 className='text-center text-2x1 text-neutral-700 font-medium'>Recruiter {state}</h1>
+    <p className='text-sm'>Welcome back! Please sign in to continue </p>
     {state === "Sign Up" && isTextDataSubmited 
     ?<>
        <div className='flex items-center gap-4 my-10'>
@@ -115,7 +115,7 @@ return (
      <p className='text-sm text-blue-600 my-4 cursor-pointer '>Forget password?</p>
 
     <button type='submit' className='bg-blue-600 w-full text-white py-2 rounded-full mt-4'>
-        {state === 'Login' ? 'Đăng nhập' : isTextDataSubmited ? 'create account' : 'Kế tiếp'}
+        {state === 'Login' ? 'login' : isTextDataSubmited ? 'create account' : 'next'}
     </button>
 
     {
